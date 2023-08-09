@@ -1,0 +1,1240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "QUH DOCK API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "QUH DOCK",
+      "description": "Company Task Api"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions":{
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "scheme": "bearer",
+     "bearerFormat":"JWT"  }
+  },
+  "paths": {
+    "/users/login":
+    {
+    "post":
+    {
+      "tags": [
+        "User login"
+      ],
+      "summary": "authenticate users",
+      "description": "Api to authenticate users",
+      "operationId": "authenticateusers",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "authenticate users",
+          "description": "create details for new employee",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/user"
+          }
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "data created"
+        },
+        "400": {
+          "description": "invalid input"
+        }
+      }
+    }
+  },
+    "/employee/createEmployeeDetail": {
+      "post":
+      {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Employee details"
+        ],
+        "summary": "create a employeeDetails",
+        "description": "create a new employeeDetails",
+        "operationId": "createEmployee",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create employee",
+            "description": "create details for new employee",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          }
+       ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+
+            }
+
+
+      }
+    },
+
+    "/employee/getEmployee": {
+      "get": {
+        "tags": [
+          "Employee details"
+        ],
+        "summary": "Get employee details",
+        "description": "Get employee details",
+        "operationId": "GetAllEmployees",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "get employees",
+            "in": "path",
+            "required": true,
+            "description": "get all employees data",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "400": {
+            "description": "invalid input, bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/employee/deleteEmployees/{employeeId}": {
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],   "tags": [
+          "Employee details"
+        ],
+        "summary": "delete employee ",
+        "description": "delete employee ",
+        "operationId": "deleteEmployee",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "employeeId",
+            "description": "delete Employee by id",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data deleted successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/employee/updateEmployee/{employeeId}": {
+      "put": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Employee details"
+        ],
+        "summary": "update Employees",
+        "description": "update employees details by id",
+        "operationId": "EmployeeDataUpdated",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "body",
+            "required": true,
+            "description": "update the employee data",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/employee"
+            }
+          },
+          {
+            "in": "path",
+            "name": "employeeId",
+            "description": "update Employee by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+  },
+    "/FAQ/createFAQ": {
+      "post": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "FAQ details"
+        ],
+        "summary": "create a FAQ",
+        "description": "create a FAQ",
+        "operationId": "FAQ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create FAQ",
+            "description": "create FAQ",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/faq"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    },
+    "/FAQ/getFAQ": {
+      "get": {
+        "tags": [
+          "FAQ details"
+        ],
+        "summary": "Get FAQ data",
+        "description": "Get FAQ data",
+        "operationId": "FAQGet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "get FAQ",
+            "in": "path",
+            "required": true,
+            "description": "get FAQ data",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "400": {
+            "description": "invalid input, bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/FAQ/updateFAQ/{FAQId}": {
+      "put": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "FAQ details"
+        ],
+        "summary": "update FAQ",
+        "description": "update FAQ by id",
+        "operationId": "{FAQId}",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "body",
+            "required": true,
+            "description": "update the FAQ data",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/faq"
+            }
+          },
+          {
+            "in": "path",
+            "name": "FAQId",
+            "description": "update FAQ by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+    },
+    "/FAQ/deleteFAQ/{FAQId}": {
+      "delete": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "FAQ details"
+        ],
+        "summary": "delete FAQ",
+        "description": "delete FAQ by id",
+        "operationId": "deleteEFAQ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "FAQId",
+            "description": "delete FAQ by id",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/faq"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data deleted successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/Generalsettings/createGeneralSettings": {
+      "post": {
+        "tags": [
+          "GeneralSettings details"
+        ],
+        "summary": "create GeneralSettings",
+        "description": "create GeneralSettings",
+        "operationId": "createGeneralSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create  GeneralSettings",
+            "description": "create details for GeneralSettings",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GeneralSettings"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    },
+    "/Generalsettings/getGeneralSettings": {
+      "get": {
+        "tags": [
+          "GeneralSettings details"
+        ],
+        "summary": "get GeneralSettings",
+        "description": "get GeneralSettings",
+        "operationId": "getGeneralSettings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "get GeneralSettings",
+            "description": "get details of GeneralSettings",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/GeneralSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "401": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/GeneralSettings/updateGeneralSettings/{GeneralSettingsId}": {
+      "put": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "GeneralSettings details"
+        ],
+        "summary": "update GeneralSettings",
+        "description": "update GeneralSettings by id",
+        "operationId": "GeneralSettingsId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "GeneralSettingsId",
+            "in": "body",
+            "required": true,
+            "description": "update the GeneralSettingsdata",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/GeneralSettings"
+            }
+          },
+          {
+            "in": "path",
+            "name": "GeneralSettingsId",
+            "description": "update GeneralSettings by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+       }
+     }
+    },
+    "/services/createServices": {
+      "post": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Services details"
+        ],
+        "summary": "create Services",
+        "description": "create  new Services",
+        "operationId": "Services",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create Services",
+            "description": "create details for new Services",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/services"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    },
+    "/services/getServices": {
+      "get": {
+        "tags": [
+          "Services details"
+        ],
+        "summary": "Get services",
+        "description": "Get services details",
+        "operationId": "Getservices",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "get services",
+            "in": "path",
+            "required": true,
+            "description": "get services data",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "400": {
+            "description": "invalid input, bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/services/deleteServices/{ServicesId}": {
+      "delete": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Services details"
+        ],
+        "summary": "delete Services ",
+        "description": "delete Services",
+        "operationId": "deleteServices",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ServicesId",
+            "description": "delete Employee by id",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/services"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data deleted successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/services/updateServices/{ServicesId}": {
+      "put": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Services details"
+        ],
+        "summary": "update Services",
+        "description": "update Services by id",
+        "operationId": "{ServicesId}",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "body",
+            "required": true,
+            "description": "update the Services data",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/services"
+            }
+          },
+          {
+            "in": "path",
+            "name": "ServicesId",
+            "description": "update Services by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+    },
+    "/Testmonials/createTestMonials": {
+      "post": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Testmonials  details"
+        ],
+        "summary": "create Testmonials",
+        "description": "create Testmonials",
+        "operationId": "createTestmonials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create Testmonials",
+            "description": "create details for new Testmonials",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/testmonials"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    },
+    "/Testmonials/getTestMonials": {
+      "get": {
+        "tags": [
+          "Testmonials  details"
+        ],
+        "summary": "Get Testmonials details",
+        "description": "Get Testmonials  details",
+        "operationId": "GetTestmonials ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "get Testmonials ",
+            "in": "path",
+            "required": true,
+            "description": "get Testmonials  data",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "400": {
+            "description": "invalid input, bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/Testmonials/updateTestmonials/{TestmonialsId}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Testmonials  details"
+        ],
+        "summary": "update Testmonials",
+        "description": "update Testmonials by id",
+        "operationId": "TestmonialsId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "TestmonialsId",
+            "in": "body",
+            "required": true,
+            "description": "update the Testmonialsdata",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/testmonials"
+            }
+          },
+          {
+            "in": "path",
+            "name": "TestmonialsId",
+            "description": "update Testmonials by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+    },
+    "/Testmonials/deleteTestmonials/{TestmonialsId}": {
+      "delete": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Testmonials  details"
+        ],
+        "summary": "delete Testmonials",
+        "description": "delete Testmonials",
+        "operationId": "deleteTestmonials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TestmonialsId",
+            "description": "delete Testmonials by id",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/testmonials"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data deleted successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      } },
+    "/portfolio/createPortfolio":
+    {
+      "post":
+      {
+        "tags": [
+          "Portfolio  details"
+        ],
+        "summary": "create portfolio",
+        "description": "create portfolio",
+        "operationId": "createportfolio",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "create portfolio",
+            "description": "create details for portfolio",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/portfolio"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data created"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    }, "/portfolio/getportfolio": {
+      "get": {
+        "tags": [
+          "Portfolio  details"
+        ],
+        "summary": "Get portfolio details",
+        "description": "Get portfolios details",
+        "operationId": "Getportfolio",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "get portfolio",
+            "in": "path",
+            "required": true,
+            "description": "get portfolio  data",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data found"
+          },
+          "400": {
+            "description": "invalid input, bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    }, "/portfolio/deleteportfolio/{portfolioId}": {
+      "delete": {"security": [
+        {
+          "Bearer": []
+        }
+      ],
+        "tags": [
+          "Portfolio  details"
+        ],
+        "summary": "delete portfolio",
+        "description": "delete portfolio",
+        "operationId": "{portfolioId}",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "portfolioId",
+            "description": "delete portfolio by id",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/portfolio"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data deleted successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      } },"/portfolio/updateportfolio/{portfolioId}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "tags": [
+          "Portfolio  details"
+        ],
+        "summary": "update portfolio",
+        "description": "update portfolio by id",
+        "operationId": "portfolioId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "portfolioId",
+            "in": "body",
+            "required": true,
+            "description": "update the portfoliodata",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/portfolio"
+            }
+          },
+          {
+            "in": "path",
+            "name": "portfolioId",
+            "description": "update portfolio by id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "data updated successfully"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "id not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "employee": {
+      "type": "object",
+      "required": [
+        "name",
+        "designation",
+        "image",
+        "joining_date"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "John"
+        },
+        "designation": {
+          "type": "string",
+          "example": "John"
+        },
+      "image": {
+        "type": "string",
+        "example": "img.png"
+      },
+      "joining_date": {
+        "type": "date",
+        "example": "2021-02-01"
+      }
+    }
+ },
+    "user": {
+      "type": "object",
+      "required": [
+        "user_name",
+        "email",
+        "password",
+        "role"
+      ],
+      "properties": {
+        "user_name": {
+          "type": "string",
+          "example": "javaria"
+        },
+        "email": {
+          "type": "string",
+          "example": "javaria@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "javaria@123"
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
+        }
+      }
+    },
+    "faq": {
+      "type": "object",
+      "required": [
+        "question",
+        "answer"
+      ],
+      "properties": {
+        "question": {
+          "type": "string",
+          "example": "address?"
+        },
+        "answer": {
+          "type": "string",
+          "example": "walton road"
+        }
+      }
+    },
+    "GeneralSettings": {
+      "type": "object",
+      "required": [
+        "projects_number",
+        "enterpise_clients_number",
+        "countries_number",
+        "client_retention_number",
+       "linkedin_link",
+        "facebook_link",
+        "instagram_link",
+        "local_address",
+        "international_address",
+        "phone",
+        "mail"
+      ],
+      "properties": {
+        "projects_number": {
+          "type": "integer",
+          "example": 16
+        },
+        "enterpise_clients_number": {
+          "type": "integer",
+          "example": 13
+        },
+        "countries_number": {
+          "type": "integer",
+          "example": 23
+        },
+        "client_retention_number": {
+          "type": "integer",
+          "example": 34
+        },
+        "linkedin_link": {
+          "type": "text",
+          "example": "https://pk.linkedin.com/company/quhdock"
+        },
+        "facebook_link": {
+          "type": "text",
+          "example": "https://www.facebook.com/quhdockofficial"
+        },
+        "instagram_link": {
+          "type": "text",
+          "example": "https://www.instagram.com/quhdock"
+        },
+        "local_address": {
+          "type": "text",
+          "example": "walton road lahore"
+        },
+        "international_address": {
+          "type": "text",
+          "example": "1309 Coffeen Avenue STE 1200 Sheridan, WY 82801"
+        },
+        "phone": {
+          "type": "string",
+          "example": "0309-1251983"
+        },
+        "mail": {
+          "type": "string",
+          "example": "user@gmail.com"
+        }
+      }
+    },
+    "services": {
+      "type": "object",
+      "required": [
+        "image",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "image": {
+          "type": "string",
+          "example": "img.png"
+        },
+        "title": {
+          "type": "string",
+          "example": "John"
+        },
+        "description": {
+          "type": "text",
+          "example": "2021-02-01"
+        }
+      }
+    },
+    "testmonials": {
+      "type": "object",
+      "required": [
+        "client_name",
+        "project_name",
+        "rating",
+        "description"
+      ],
+      "properties": {
+        "client_name": {
+          "type": "string",
+          "example": "john"
+        },
+        "project_name": {
+          "type": "string",
+          "example": "quh dock"
+        },
+        "rating": {
+          "type": "integer",
+          "example": 123
+        },
+        "description": {
+          "type": "text",
+          "example": "pleasent experience"
+        }
+      }
+    },
+    "portfolio": {
+      "type": "object",
+      "required": [
+        "project_name",
+        "description"
+      ],
+      "properties": {
+      "project_name": {
+        "type": "string",
+        "example": "quh dock"
+      },
+      "description": {
+        "type": "string",
+        "example": "pleasent experience"
+      }
+    }
+  },
+  "portfolioImages":{
+    "type": "object",
+    "required": [
+      "portfolio_id",
+      "images"
+    ],
+    "properties": {
+      "portfolio_id": {
+        "type": "string",
+        "example": "img.png"
+      },
+      "images": {
+        "type": "string",
+        "example": "img.png"
+      }
+    }
+  }
+}
+}
